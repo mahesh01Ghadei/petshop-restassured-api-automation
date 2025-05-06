@@ -10,6 +10,7 @@
     <classes>
       <class name="api.test.UserTest"/>
       <!-- <class name="api.test.CreateUserFromXlData"/> -->
+      <class name="api.test.PetTest" />
     </classes>
   </test> 
 </suite> 
