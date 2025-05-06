@@ -1,38 +1,37 @@
 package api.endpoints;
 
-import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 import java.util.ResourceBundle;
 
-import api.payload.User;
+import api.payload.Pet;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
-public class UserEndpoints {
+public class PetEndpoints {
 	
 	static ResourceBundle getUrl() {
 		ResourceBundle routes = ResourceBundle.getBundle("routes");
 		return routes;
 	}
 	
-    public static Response createUser(User payload) {
+    public static Response addPet(Pet payload) {
     	
-		String url = getUrl().getString("user_post_url");
+		String url = getUrl().getString("pet_post_url");
 		Response response = given()
 							.contentType(ContentType.JSON)
 							.accept(ContentType.JSON)
 							.body(payload)
 				            .when()
 				            .post(url);
-		
 		return response;
 	}
 	
-	public static Response readUser(String username) {
+	public static Response readPets(int petId) {
 		
-		String url = getUrl().getString("user_get_url");
+		String url = getUrl().getString("pet_get_url");
 		Response response = given()
-				            .pathParam("username",username)
+				            .pathParam("petId",petId)
 				            .when()
 				            .get(url);
 		return response;
@@ -40,11 +39,11 @@ public class UserEndpoints {
 	}
 	
 	
-	public static Response updateUser(String username, User payload) {
+	public static Response updatePetDetails(String petId, Pet payload) {
 		
-		String url = getUrl().getString("user_update_url");
+		String url = getUrl().getString("pet_update_url");
 		Response response = given()
-				            .pathParam("username", username)
+				            .pathParam("petId", petId)
 				            .contentType(ContentType.JSON)
 							.accept(ContentType.JSON)
 							.body(payload)
@@ -54,16 +53,15 @@ public class UserEndpoints {
 		return response;
 	}
 	
-	public static Response deleteUser(String username) {
+	public static Response deletePetDetails(String petId) {
 		
 		String url = getUrl().getString("user_delete_url");
 		Response response = given()
-				            .pathParam("username", username)
+				            .pathParam("petId", petId)
 				            .when()
 				            .delete(url);
 		return response;
 		
 	}
-
 	
 }
